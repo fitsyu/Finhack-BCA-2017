@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class MyProfile_ViewController: UIViewController
 {
@@ -14,7 +15,9 @@ class MyProfile_ViewController: UIViewController
     // MARK: OUtlets
     @IBOutlet weak var txDigitalID: UILabel!
     @IBOutlet weak var txBankAccount: UILabel!
+    @IBOutlet weak var txBalance: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
     
     
     // MARK: Properties
@@ -22,18 +25,9 @@ class MyProfile_ViewController: UIViewController
     
     override func viewDidLoad() {
         
-        transactions = [
-        
-//            TransactionEntry(tipe: "D", tgl: Date(), amount: 10000),
-//            TransactionEntry(tipe: "D", tgl: Date(), amount: 100400),
-//            TransactionEntry(tipe: "K", tgl: Date(), amount: 12000),
-//            TransactionEntry(tipe: "K", tgl: Date(), amount: 100300),
-//            TransactionEntry(tipe: "D", tgl: Date(), amount: 100010),
-
-        ]
-        
-        
         txDigitalID.text = User.DigitalID
+        
+        txBankAccount.text = User.BankAccountNumber.isEmpty ? "---" : User.BankAccountNumber
     }
     
     
@@ -57,9 +51,13 @@ class MyProfile_ViewController: UIViewController
         
                     
                     let accountNumber = json["accountNumber"].stringValue
-                    //let balance       = json["balance"].intValue
-                    
                     self.txBankAccount.text = accountNumber
+                    
+                    // save
+                    User.BankAccountNumber = accountNumber
+                    
+                    let balance       = json["balance"].intValue
+                    self.txBalance.text = balance.IDR
                     
                     self.getHistory()
         })
@@ -75,30 +73,54 @@ class MyProfile_ViewController: UIViewController
                 using: .get,
                 with: [:],
                 ifOKThen: {  json in
-                    
-          
-                    for rawTrx in json["data"].arrayValue
-                    {
-                        let tipe   = rawTrx["transactionType"].stringValue
-                        
-                        let amount = rawTrx["transactionAmount"].intValue
-                        
-                        
-                        let tgl    = rawTrx["transactionDate"].stringValue
-                        
-                        let dTgl = SIPDateFormatter.ddMMMMyyyy.date(from: tgl) ?? Date()
-                        
-                        let trx = TransactionEntry(tipe: tipe, tgl: dTgl, amount: amount)
-                        
-                        
-                        self.transactions.append( trx )
-                        
-                    }
-                    
-                    self.tableView.reloadData()
+       
+                    self.reloadCells(source: json["data"])
                     
         })
 
+    }
+    
+    func reloadCells(source: JSON)
+    {
+        guard !source.arrayValue.isEmpty else { return }
+        
+        // slowly and elegantly insert each one into the table view
+        var i = 0
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(0.25),
+                             repeats: true)
+        {
+            timer in
+            
+            // extraact
+            let rawTrx = source[i]
+            let tipe   = rawTrx["transactionType"].stringValue
+            
+            let amount = rawTrx["transactionAmount"].intValue
+            
+            
+            let tgl    = rawTrx["transactionDate"].stringValue
+            
+            let dTgl = SIPDateFormatter.ddMMMMyyyy.date(from: tgl) ?? Date()
+            
+            let trx = TransactionEntry(tipe: tipe, tgl: dTgl, amount: amount)
+            
+            
+            self.transactions.append( trx )
+
+            
+            
+            let indexPath = IndexPath(row: i, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .right)
+            
+            i += 1
+            if i >= source.arrayValue.count {
+                timer.invalidate()
+                
+                guard !self.transactions.isEmpty else { return }
+                
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .middle, animated: true)
+            }
+        }
     }
 }
 

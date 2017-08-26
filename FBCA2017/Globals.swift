@@ -13,4 +13,5 @@ class User
 {
     static var DigitalID = ""
     static var Password  = ""
+    static var BankAccountNumber = ""
 }
