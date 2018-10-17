@@ -34,6 +34,7 @@
 		E81DCE571F4FBE87000B92E1 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		E81DCE591F4FBF10000B92E1 /* Taman Kanak Kanak.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Taman Kanak Kanak.playground"; sourceTree = "<group>"; };
 		E84C70571F51B82900C051AC /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		E8C9CA561F5202A6000D438A /* FBCA2017.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FBCA2017.entitlements; sourceTree = "<group>"; };
 		E8DF137A1F51316E00F9B121 /* My Documents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "My Documents.swift"; sourceTree = "<group>"; };
 		E8DF137C1F51342500F9B121 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E8DF137E1F514B7100F9B121 /* Submit Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Submit Document.swift"; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		E81DCE441F4FBE5B000B92E1 /* FBCA2017 */ = {
 			isa = PBXGroup;
 			children = (
+				E8C9CA561F5202A6000D438A /* FBCA2017.entitlements */,
 				E8DF13771F51310900F9B121 /* Scene */,
 				E81DCE451F4FBE5B000B92E1 /* AppDelegate.swift */,
 				E81DCE491F4FBE5B000B92E1 /* Main.storyboard */,
@@ -153,6 +155,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = K2DPUDSBTN;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -371,6 +378,7 @@
 			baseConfigurationReference = 1D6CFE6CB3F54ED8CBC862BA /* Pods-FBCA2017.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FBCA2017/FBCA2017.entitlements;
 				DEVELOPMENT_TEAM = K2DPUDSBTN;
 				INFOPLIST_FILE = FBCA2017/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -386,6 +394,7 @@
 			baseConfigurationReference = 8A0526785F6BE10E471D0049 /* Pods-FBCA2017.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FBCA2017/FBCA2017.entitlements;
 				DEVELOPMENT_TEAM = K2DPUDSBTN;
 				INFOPLIST_FILE = FBCA2017/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
