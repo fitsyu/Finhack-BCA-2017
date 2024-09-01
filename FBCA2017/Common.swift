@@ -358,7 +358,7 @@ extension UIScrollView {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyBoardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func keyBoardDidShow(notification: Notification) {
+    @objc func keyBoardDidShow(notification: Notification) {
         
         let info = notification.userInfo as NSDictionary?
         let rectValue = info![UIKeyboardFrameBeginUserInfoKey] as! NSValue
@@ -371,7 +371,7 @@ extension UIScrollView {
         
     }
     
-    func keyBoardWillHide(notification: Notification) {
+    @objc func keyBoardWillHide(notification: Notification) {
         
         // restore content inset to 0
         let contentInsets = UIEdgeInsetsMake(0, 0, 0, 0)

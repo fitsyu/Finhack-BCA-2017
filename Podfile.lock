@@ -9,19 +9,28 @@ PODS:
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4)
+  - Alamofire
   - BDatePicker
-  - NVActivityIndicatorView (= 3.6.0)
+  - NVActivityIndicatorView
   - SwiftyJSON
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - BDatePicker
+    - FSCalendar
+    - NVActivityIndicatorView
+    - PopupDialog
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   BDatePicker: 939638abeffc66200bc03dd774f0b46228481a64
-  FSCalendar: '09369a2bf554ba71cd8e8cfb627e2df22a2c2af4'
+  FSCalendar: 09369a2bf554ba71cd8e8cfb627e2df22a2c2af4
   NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
   PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: f4167b78a18d9f01c1f81f77397863e60634af52
+PODFILE CHECKSUM: 45773818ed6c3c88ddbfa2609f11077087acbd75
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.10.1

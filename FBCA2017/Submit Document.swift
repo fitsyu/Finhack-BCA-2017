@@ -134,11 +134,11 @@ extension SubmitDocument_ViewController: UITextFieldDelegate
         }
     }
     
-    func closeTxAmount() {
+    @objc func closeTxAmount() {
         _ = textFieldShouldReturn(txAmount)
     }
     
-    func closeTxType()
+    @objc func closeTxType()
     {
          _ = textFieldShouldReturn(txType)
     }
